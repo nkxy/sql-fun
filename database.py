@@ -50,16 +50,23 @@ def add_pairing():
     arr = [1, 2, 3, 4]
     for x in range(len(participants)):
         to_person = x + 1
-        from_person = random.choice(arr);
+        from_person = random.choice(arr)
         while (from_person == to_person):
             from_person = random.choice(arr)
         arr.remove(from_person)
-        c.execute('INSERT INTO pairing (to_person_fk, from_person_fk) VALUES(?, ?)', (to_person, from_person))
+        c.execute('INSERT INTO pairing (to_person_fk, from_person_fk) VALUES(?, ?)',
+                  (to_person, from_person))
 
     conn.commit()
 
 
-create_table()
-add_pairing()
+def get_caseys_secret_santa():
+    c.execute("SELECT name, wish_list FROM person WHERE person_pk = (SELECT from_person_fk FROM pairing WHERE to_person_fk = (SELECT person_pk FROM person WHERE name = 'Casey'))")
+    print(c.fetchall())
+
+
+# create_table()
+# add_pairing()
 # add_participants(participants)
+get_caseys_secret_santa()
 close()
