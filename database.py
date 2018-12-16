@@ -22,8 +22,9 @@ participants = [Person('Casey', 19, 'candles'),
 
 
 def create_table():
-    c.execute('CREATE TABLE IF NOT EXISTS person(person_pk NOT NULL INTEGER PRIMARY KEY, name TEXT, age INTEGER, wish_list TEXT, date_created TEXT)')
-    c.execute('CREATE TABLE IS NOT EXISTS pairing(to_person_fk NOT NULL INTEGER,from_person_fk NOT NULL INTEGER)')
+    c.execute('CREATE TABLE IF NOT EXISTS person(person_pk INTEGER PRIMARY KEY, name TEXT, age INTEGER, wish_list TEXT, date_created TEXT)')
+    c.execute(
+        'CREATE TABLE IF NOT EXISTS pairing(to_person_fk INTEGER,from_person_fk INTEGER)')
 
 
 def add_casey():
