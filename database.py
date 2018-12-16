@@ -27,16 +27,6 @@ def create_table():
         'CREATE TABLE IF NOT EXISTS pairing(to_person_fk INTEGER,from_person_fk INTEGER)')
 
 
-def add_casey():
-    c.execute("INSERT INTO people VALUES('Casey Niu', 19)")
-    conn.commit()
-
-
-def add_nick():
-    c.execute("INSERT INTO people VALUES('Nick Yang', 19)")
-    conn.commit()
-
-
 def close():
     c.close()
     conn.close()
