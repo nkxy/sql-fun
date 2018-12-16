@@ -60,13 +60,15 @@ def add_pairing():
     conn.commit()
 
 
-def get_caseys_secret_santa():
-    c.execute("SELECT name, wish_list FROM person WHERE person_pk = (SELECT from_person_fk FROM pairing WHERE to_person_fk = (SELECT person_pk FROM person WHERE name = 'Casey'))")
+def get_secret_santa(person):
+    c.execute("SELECT name, wish_list FROM person WHERE person_pk = (SELECT from_person_fk FROM pairing WHERE to_person_fk = (SELECT person_pk FROM person WHERE name = ?))", [person.name])
     print(c.fetchall())
 
 
 # create_table()
 # add_pairing()
 # add_participants(participants)
-get_caseys_secret_santa()
+for person in participants:
+    print(person.name+"'s secret santa is:")
+    get_secret_santa(person)
 close()
