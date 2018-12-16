@@ -16,12 +16,14 @@ class Person:
 conn = sqlite3.connect('database.db')
 c = conn.cursor()
 participants = [Person('Casey', 19, 'candles'),
-                Person('Nick', 19, 'candy cane')]
+                Person('Nick', 19, 'candy cane'),
+                Person('Jason', 19, 'hype beast clothes'),
+                Person('Sophie', 19, 'air pods')]
 
 
 def create_table():
-    c.execute(
-        'CREATE TABLE IF NOT EXISTS person(name TEXT, age REAL, wish_list TEXT, date_created TEXT)')
+    c.execute('CREATE TABLE IF NOT EXISTS person(person_pk NOT NULL INTEGER PRIMARY KEY, name TEXT, age INTEGER, wish_list TEXT, date_created TEXT)')
+    c.execute('CREATE TABLE IS NOT EXISTS pairing(to_person_fk NOT NULL INTEGER,from_person_fk NOT NULL INTEGER)')
 
 
 def add_casey():
