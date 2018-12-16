@@ -11,8 +11,8 @@ def create_table():
 def add_casey():
     c.execute("INSERT INTO people VALUES('Casey Niu', 19)")
     conn.commit()
-    conn.close()
     c.close()
+    conn.close()
 
 
 create_table()
