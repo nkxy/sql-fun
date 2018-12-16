@@ -1,11 +1,23 @@
+#!/usr/bin/env python3
+
 import sqlite3
+import random
+import time
+import datetime
+
+class Person:
+    def __init__(self, name, age, wish_list):
+        self.name = name
+        self.age = age
+        self.wish_list = wish_list
 
 conn = sqlite3.connect('database.db')
 c = conn.cursor()
-
+participants = [Person('Casey', 19, 'candles'),
+                Person('Nick', 19, 'candy cane')]
 
 def create_table():
-    c.execute('CREATE TABLE IF NOT EXISTS people(name TEXT, age REAL)')
+    c.execute('CREATE TABLE IF NOT EXISTS person(name TEXT, age REAL, wish_list TEXT, date_created TEXT)')
 
 
 def add_casey():
@@ -23,6 +35,16 @@ def close():
     conn.close()
 
 
+def add_person(person):
+    unix = time.time()
+    date = str(datetime.datetime.fromtimestamp(unix).strftime('%Y-%m-%d %H:%M:%S'))
+    c.execute('INSERT INTO person VALUES(?, ?, ?, ?)', (person.name, person.age, person.wish_list, date))
+
+def add_participants(participants):
+    for person in participants:
+        add_person(person)
+
+
 create_table()
-add_nick()
+add_participants(participants)
 close()
